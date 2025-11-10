@@ -62,33 +62,22 @@ Limitations (static environment):
 - Cannot inspect open ports, banner grabbing, or full SSL chain trust
 
 ### Modular Scanners (Extensible)
-The UI now displays independent scanner statuses. Each scanner runs sequentially and reports its own issues.
+The UI now displays independent scanner statuses. Each scanner runs in parallel and reports its own issues.
 
-Scanners live in `src/utils/domainScannerFramework.ts` and are typed by `src/types/domainScan.ts`.
+The scanner framework is modular with each scanner in its own file. See the **[Scanner Documentation](src/utils/scanners/README.md)** for detailed information on:
+- How the scanner architecture works
+- How to add a new scanner
+- Available scanners and their configurations
+- Testing strategies
+- Best practices
 
-Add a new scanner:
-1. Open `src/utils/domainScannerFramework.ts`.
-2. Define a new constant implementing `DomainScanner`:
-	 ```ts
-	 const myScanner: DomainScanner = {
-		 id: 'myScanner',
-		 label: 'My Scanner',
-		 description: 'Brief description',
-		 run: async (domain) => {
-			 // Perform checks
-			 const data = {/* ... */};
-			 const issues = [];
-			 if (/* problem */) issues.push('Detected issue');
-			 return { data, summary: 'What was found', issues }; // summary & issues optional
-		 }
-	 };
-	 ```
-3. Append it to the `SCANNERS` array.
-4. The UI will automatically render its status, summary, and issues.
+Quick overview:
+- Scanners live in `src/utils/scanners/` (one file per scanner)
+- Main exports from `src/utils/scanners/index.ts`
+- Types defined in `src/types/domainScan.ts`
+- Each scanner is independent with its own tests
 
-Optionally compute issues later by providing `deriveIssues(result, domain)` instead of filling `issues` in `run`.
-
-Rerunning scanners: For future enhancements you can expose `runScanner(domain, id)` to re-run one scanner; currently all run via the "Scan Domain" button.
+The modular structure allows multiple developers to work on different scanners simultaneously without merge conflicts.
 
 ## Export / Import
 - JSON export includes answers + last domain scan.

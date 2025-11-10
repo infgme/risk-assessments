@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppState } from '../../context/AppStateContext';
-import { SCANNERS, interpretScannerResult } from '../../utils/domainScannerFramework';
+import { SCANNERS, interpretScannerResult } from '../../utils/scanners';
 import { TrackedButton } from '../TrackedButton';
 import { trackFormSubmit } from '../../utils/analytics';
 import { validateDomain } from '../../utils/domainValidation';

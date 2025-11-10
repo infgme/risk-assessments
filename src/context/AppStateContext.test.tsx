@@ -3,7 +3,7 @@ import React from 'react';
 import { AppStateProvider, useAppState } from './AppStateContext';
 import * as amplitude from '@amplitude/analytics-browser';
 import { DomainScanAggregate } from '../types/domainScan';
-import { runAllScanners } from '../utils/domainScannerFramework';
+import { runAllScanners } from '../utils/scanners';
 
 // Mock amplitude
 vi.mock('@amplitude/analytics-browser', () => ({
@@ -42,8 +42,8 @@ vi.mock('../data/questions.json', () => ({
   }
 }));
 
-// Mock domainScannerFramework
-vi.mock('../utils/domainScannerFramework', () => ({
+// Mock scanners
+vi.mock('../utils/scanners', () => ({
   SCANNERS: [{ id: 'dns', label: 'DNS', run: vi.fn() }],
   runAllScanners: vi.fn()
 }));

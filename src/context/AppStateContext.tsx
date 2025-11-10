@@ -4,7 +4,7 @@ import { Question, RawOption, RawQuestion } from '../types/questions';
 import { computeScore, ScoreResult } from '../utils/scoring';
 import { mapRisks, RiskMappingResult } from '../utils/recommendations';
 import { DomainScanResult } from '../utils/domainChecks';
-import { runAllScanners } from '../utils/domainScannerFramework';
+import { runAllScanners } from '../utils/scanners';
 import { DomainScanAggregate } from '../types/domainScan';
 import { ExecutedScannerResult } from '../types/domainScan';
 import { APP_CONFIG } from '../config/appConfig';

@@ -1,6 +1,6 @@
 import type { ScoreResult } from './scoring';
 import type { DomainScanAggregate } from '../types/domainScan';
-import { interpretScannerResult } from './domainScannerFramework';
+import { interpretScannerResult } from './scanners';
 
 interface ExportReportOptions {
   score: ScoreResult;

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useAppState } from '../../context/AppStateContext';
 import CategoryRadarChart from '../CategoryRadarChart';
-import { interpretScannerResult } from '../../utils/domainScannerFramework';
+import { interpretScannerResult } from '../../utils/scanners';
 import { exportToWord } from '../../utils/exportReport';
 import { TrackedButton } from '../TrackedButton';
 import { TrackedLink } from '../TrackedLink';
