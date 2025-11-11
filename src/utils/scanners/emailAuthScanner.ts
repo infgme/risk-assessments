@@ -28,11 +28,30 @@ export const emailAuthScanner: DomainScanner = {
     } else {
       // Check SPF policy strength
       if (spf.includes('~all')) {
-        warnings.push('SPF uses soft fail (~all) - consider upgrading to hard fail (-all) for better protection');
+        // Soft fail is actually recommended with DMARC - no warning needed
+        // With DMARC, ~all and -all have the same security properties
+      } else if (spf.includes('-all')) {
+        // Hard fail can cause deliverability issues with forwarded email
+        if (dmarc && (dmarc.toLowerCase().includes('p=quarantine') || dmarc.toLowerCase().includes('p=reject'))) {
+          warnings.push(
+            'SPF uses hard fail (-all) which can cause deliverability issues with forwarded emails. ' +
+            'Since you have DMARC enforcement, consider using soft fail (~all) instead - it provides ' +
+            'the same security but better deliverability. ' +
+            'See https://www.mailhardener.com/blog/why-mailhardener-recommends-spf-softfail-over-fail'
+          );
+        } else {
+          // Hard fail without DMARC enforcement is actually weaker security
+          warnings.push(
+            'SPF uses hard fail (-all). For best security AND deliverability, combine soft fail (~all) ' +
+            'with DMARC enforcement (p=quarantine or p=reject)'
+          );
+        }
       } else if (spf.includes('+all')) {
         issues.push('SPF allows all senders (+all) - this provides no protection against spoofing');
       } else if (spf.includes('?all')) {
-        warnings.push('SPF uses neutral policy (?all) - consider using -all or ~all for protection');
+        warnings.push('SPF uses neutral policy (?all) - consider using ~all with DMARC for protection');
+      } else if (!spf.includes('all')) {
+        warnings.push('SPF record missing "all" mechanism - add ~all to the end of your SPF record');
       }
       // Check for too many DNS lookups (SPF limit is 10)
       const includeCount = (spf.match(/include:/g) || []).length;
