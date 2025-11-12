@@ -43,47 +43,37 @@
       ]
     },
     {
-      "id": "governance_program_management_q2",
-      "text": "Are policies and standards communicated to all employees and contractors?",
-      "category": "Governance & Program Management",
-      "options": [
-        {
-          "option": "No formal information security policies exist",
-          "risk": "Policies are not effectively communicated to employees and contractors, leading to inconsistent awareness and compliance.",
-          "points": 0
-        },
-        {
-          "option": "Approved policies exist; reviewed within the last 12 months and version control is maintained",
-          "risk": "Policy communication and version control exist but lack clear ownership, creating potential for confusion or delay.",
-          "points": 0
-        },
-        {
-          "option": "Draft policies exist but not formally approved",
-          "risk": "Policies are communicated informally, reducing accountability and increasing the likelihood of misinterpretation.",
-          "points": 25
-        },
-        {
-          "option": "Approved policies exist; reviewed within the last 12 months with documented evidence and senior management sign-off",
-          "risk": "Policies are communicated organization-wide with documented acknowledgment and leadership approval, aligning with governance best practices.",
-          "points": 33
-        },
-        {
-          "option": "Approved policies exist; last review was over 24 months ago",
-          "risk": "Policies are reviewed too infrequently to capture changing organizational or regulatory requirements.",
-          "points": 50
-        },
-        {
-          "option": "Approved policies exist; last review within the last 12–24 months",
-          "risk": "Infrequent review and communication of policies lead to operational drift and outdated practices.",
-          "points": 75
-        },
-        {
-          "option": "Approved policies exist; reviewed and approved within the last 12 months",
-          "risk": "Policy management processes are well-defined and current, supporting consistent communication and adoption across the organization.",
-          "points": 100
-        }
-      ]
+  "id": "governance_program_management_q2",
+  "text": "Are policies and standards effectively communicated, acknowledged, and accessible to all employees and contractors?",
+  "category": "Governance & Program Management",
+  "options": [
+    {
+      "option": "Policies are not shared or accessible to staff",
+      "risk": "Employees and contractors are unaware of policy expectations, increasing noncompliance and inconsistent behavior.",
+      "points": 0
     },
+    {
+      "option": "Policies are available but not actively communicated",
+      "risk": "Uncommunicated policies limit awareness and reduce accountability for compliance obligations.",
+      "points": 25
+    },
+    {
+      "option": "Policies are distributed via email or intranet without acknowledgment tracking",
+      "risk": "Untracked communication provides no assurance that personnel have read or understood policy requirements.",
+      "points": 50
+    },
+    {
+      "option": "Policies are communicated during onboarding and periodically reminded",
+      "risk": "Periodic reminders improve awareness but lack formal acknowledgment or measurement of understanding.",
+      "points": 75
+    },
+    {
+      "option": "Policies are communicated through onboarding, annual refresher training, and tracked acknowledgment",
+      "risk": "Policies are consistently communicated and acknowledged by all staff, reflecting strong governance and awareness best practices.",
+      "points": 100
+    }
+  ]
+},
     {
       "id": "governance_program_management_q3",
       "text": "Do you maintain an inventory of information systems, applications, and assets?",
