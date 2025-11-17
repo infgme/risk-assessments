@@ -13,4 +13,5 @@ RUN npm run build
 FROM caddy:alpine
 # Copy the built application from the previous stage
 COPY --from=app /app/dist /usr/share/caddy
+COPY caddyfile /etc/caddy/Caddyfile
 RUN setcap -r /usr/bin/caddy
