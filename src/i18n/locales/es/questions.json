@@ -51,7 +51,7 @@
         },
         "opt1": {
           "label": "Las políticas están disponibles pero no se comunican activamente",
-          "risk": "Las políticas no comunicadas limitan la conciencia y reducen la responsabilidad por las obligaciones de cumplimiento."
+          "risk": "La comunicación sin seguimiento no proporciona garantía de que el personal haya leído o comprendido los requisitos de la política."
         },
         "opt2": {
           "label": "Las políticas se distribuyen por correo electrónico o intranet sin seguimiento de reconocimiento",

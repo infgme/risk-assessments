@@ -51,7 +51,7 @@
         },
         "opt1": {
           "label": "Policies are available but not actively communicated",
-          "risk": "Uncommunicated policies limit awareness and reduce accountability for compliance obligations."
+          "risk": "Untracked communication provides no assurance that personnel have read or understood policy requirements."
         },
         "opt2": {
           "label": "Policies are distributed via email or intranet without acknowledgment tracking",
