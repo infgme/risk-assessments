@@ -109,7 +109,15 @@ export const AppStateProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     if (APP_CONFIG.amplitudeApiKey) {
-      amplitude.init(APP_CONFIG.amplitudeApiKey, undefined, { defaultTracking: true });
+      amplitude.init(
+        APP_CONFIG.amplitudeApiKey,
+        undefined,
+        {
+          autocapture: true,
+          cookieOptions: { secure: true, upgrade: true },
+          defaultTracking: true
+        },
+      );
     }
   }, []);
 
