@@ -333,7 +333,7 @@ describe('emailAuthScanner', () => {
     expect(result.issues?.some((issue) => issue.includes('EasyDMARC'))).toBe(true);
   });
 
-  it('should list found DKIM selectors', async () => {
+  it('should not report issues when DKIM selectors are found', async () => {
     const mockExtractSPF = domainChecks.extractSPF as ReturnType<typeof vi.fn>;
     const mockFetchDMARC = domainChecks.fetchDMARC as ReturnType<typeof vi.fn>;
     const mockCheckDKIM = domainChecks.checkDKIM as ReturnType<typeof vi.fn>;
@@ -346,7 +346,14 @@ describe('emailAuthScanner', () => {
 
     const result = await emailAuthScanner.run('example.com');
 
-    expect(result.issues?.some((issue) => issue.includes('google, selector1'))).toBe(true);
+    // Should NOT report any DKIM issues when selectors are found
+    const dkimIssues = result.issues?.filter((issue) => issue.toLowerCase().includes('dkim'));
+    expect(dkimIssues?.length || 0).toBe(0);
+
+    // Data should reflect DKIM is configured
+    const data = result.data as { hasDkim: boolean; dkimSelectorsFound: string[] };
+    expect(data.hasDkim).toBe(true);
+    expect(data.dkimSelectorsFound).toEqual(['google', 'selector1']);
   });
 
   it('should provide success summary for fully configured email auth', async () => {

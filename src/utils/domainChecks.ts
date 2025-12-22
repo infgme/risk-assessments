@@ -47,10 +47,10 @@ export const fetchDMARC = async (domain: string): Promise<string | undefined> =>
   return txt.find((t) => t.toLowerCase().includes('v=dmarc'));
 };
 
-export const checkDKIM = async (domain: string): Promise<string[]> => {
-  // Common DKIM selectors used by major email providers and services
-  // This is a heuristic approach - there's no way to enumerate all selectors via DNS
-  const selectors = [
+export const checkDKIM = async (domain: string, customSelectors?: string[]): Promise<string[]> => {
+  // If custom selectors are provided, use only those
+  // Otherwise, fall back to common DKIM selectors used by major email providers
+  const defaultSelectors = [
     // Generic/Common
     'default', 'dkim', 'mail', 'email', 'smtp',
 
@@ -77,13 +77,21 @@ export const checkDKIM = async (domain: string): Promise<string[]> => {
     'marketing', 'transactional',
   ];
 
+  const selectors = customSelectors && customSelectors.length > 0 ? customSelectors : defaultSelectors;
+
   const found: string[] = [];
 
   // Check all selectors in parallel for better performance
   const checks = selectors.map(async (sel) => {
     const name = `${sel}._domainkey.${domain}`;
     const txt = await fetchTXT(name);
-    if (txt.some((t) => t.includes('v=DKIM1'))) {
+    // Valid DKIM records contain either v=DKIM1 or p= with actual key data (not just "p=" or "p= ")
+    if (txt.some((t) => {
+      if (t.includes('v=DKIM1')) return true;
+      // Check for p= with actual content (not empty or whitespace only)
+      const pMatch = t.match(/p=([^;\s]+)/);
+      return pMatch && pMatch[1] && pMatch[1].length > 0;
+    })) {
       return sel;
     }
     return null;

@@ -3,6 +3,7 @@
 import i18next from 'i18next';
 import { DomainScanner, ExecutedScannerResult, ScannerInterpretation, SeverityLevel } from '../../types/domainScan';
 import { fetchDNS, extractSPF, fetchDMARC, checkDKIM } from '../domainChecks';
+import { getDkimSelectors } from '../dkimSelectorsService';
 
 export const emailAuthScanner: DomainScanner = {
   id: 'emailAuth',
@@ -18,7 +19,10 @@ export const emailAuthScanner: DomainScanner = {
     const txtRecords = txtRec?.data || [];
     const spf = extractSPF(txtRecords);
     const dmarc = await fetchDMARC(domain);
-    const dkimSelectorsFound = await checkDKIM(domain);
+
+    // Get custom DKIM selectors from localStorage if available
+    const customSelectors = getDkimSelectors(domain);
+    const dkimSelectorsFound = await checkDKIM(domain, customSelectors.length > 0 ? customSelectors : undefined);
 
     const issues: string[] = [];
     const warnings: string[] = [];
@@ -100,11 +104,6 @@ export const emailAuthScanner: DomainScanner = {
       issues.push(i18next.t('emailAuth.issues.noDKIM', { ns: 'scanners' }));
       warnings.push(i18next.t('emailAuth.issues.dkimNote', { ns: 'scanners' }));
       warnings.push(i18next.t('emailAuth.issues.dkimVerify', { ns: 'scanners' }));
-    } else {
-      warnings.push(i18next.t(
-        'emailAuth.issues.dkimFound',
-        { ns: 'scanners', selectors: dkimSelectorsFound.join(', ') })
-      );
     }
 
     // Aggregate assessment

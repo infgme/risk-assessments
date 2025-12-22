@@ -1,0 +1,359 @@
+.dkim-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+}
+
+.dkim-modal {
+  background: var(--panel-bg);
+  color: var(--text-primary);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-hover);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dkim-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--lightgray);
+}
+
+.dkim-modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.dkim-modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: var(--gray);
+  line-height: 1;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dkim-modal-close:hover {
+  background: var(--lightgray);
+  color: var(--text-primary);
+}
+
+.dkim-modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.dkim-info-banner {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(68, 200, 245, 0.1);
+  border-left: 4px solid var(--blue);
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.dkim-info-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--blue);
+  flex-shrink: 0;
+}
+
+.dkim-info-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+.dkim-info-banner strong {
+  color: var(--blue);
+  font-family: 'Courier New', monospace;
+}
+
+.dkim-error {
+  padding: 0.75rem;
+  background: rgba(232, 76, 61, 0.1);
+  border-left: 4px solid var(--red);
+  border-radius: 4px;
+  color: var(--red);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.dkim-selectors-section {
+  margin-bottom: 1.5rem;
+}
+
+.dkim-selectors-section h4,
+.dkim-add-section h4,
+.dkim-email-section h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dkim-selectors-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dkim-selector-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.dkim-selector-item:hover {
+  border-color: var(--accent);
+}
+
+.dkim-selector-name {
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.dkim-remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--red);
+  padding: 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: background 0.2s;
+}
+
+.dkim-remove-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.dkim-remove-btn:hover {
+  background: rgba(232, 76, 61, 0.1);
+}
+
+.dkim-add-section {
+  margin-bottom: 1.5rem;
+}
+
+.dkim-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dkim-input-group input {
+  flex: 1;
+  padding: 0.625rem 0.875rem;
+  border: 2px solid var(--lightgray);
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.dkim-input-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.dkim-input-group input.error {
+  border-color: var(--red);
+}
+
+.dkim-add-btn {
+  padding: 0.625rem 1.5rem;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.dkim-add-btn:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
+
+.dkim-error-text {
+  color: var(--red);
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.dkim-toggle-section {
+  margin: 1.5rem 0;
+}
+
+.dkim-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--card-bg);
+  border: 2px solid var(--lightgray);
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: all 0.2s;
+  width: 100%;
+  justify-content: center;
+}
+
+.dkim-toggle-btn:hover {
+  border-color: var(--accent);
+}
+
+.dkim-btn-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.dkim-email-section {
+  margin-top: 1rem;
+}
+
+.dkim-help-text {
+  font-size: 0.85rem;
+  color: var(--gray);
+  margin: 0 0 0.75rem 0;
+  line-height: 1.5;
+}
+
+.dkim-email-section textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid var(--lightgray);
+  border-radius: 6px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  resize: vertical;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.dkim-email-section textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.dkim-email-section textarea.error {
+  border-color: var(--red);
+}
+
+.dkim-extract-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--green);
+  color: var(--white);
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  margin-top: 0.75rem;
+}
+
+.dkim-extract-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.dkim-modal-footer {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+  padding: 1.5rem;
+  border-top: 1px solid var(--lightgray);
+}
+
+.dkim-cancel-btn,
+.dkim-save-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.2s;
+}
+
+.dkim-cancel-btn {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 2px solid var(--lightgray);
+}
+
+.dkim-cancel-btn:hover {
+  border-color: var(--gray);
+}
+
+.dkim-save-btn {
+  background: var(--blue);
+  color: var(--white);
+}
+
+.dkim-save-btn:hover {
+  background: var(--accent);
+  transform: translateY(-1px);
+}
