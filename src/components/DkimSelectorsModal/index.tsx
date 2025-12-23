@@ -211,6 +211,7 @@ const DkimSelectorsModal: React.FC<DkimSelectorsModalProps> = ({
                   onChange={(e) => setNewSelector(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder={t('dkimModal.selectorPlaceholder')}
+                  aria-label={t('dkimModal.selectorPlaceholder')}
                   className={errors.selector ? 'error' : ''}
                 />
                 <button className='dkim-add-btn' onClick={handleAddSelector}>
